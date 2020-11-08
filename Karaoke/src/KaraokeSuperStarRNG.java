@@ -54,12 +54,10 @@ public class KaraokeSuperStarRNG {
         try (PrintWriter pw = new PrintWriter(starsCSV)) {
            pw.append("Star Partner");
            pw.append(System.lineSeparator());
-           stars.forEach(star -> {
-               pw.append(star.getStarName())
-                       .append(" ")
-                       .append(star.getStarPartner().getStarName())
-                       .append(System.lineSeparator());
-           });
+           stars.forEach(star -> pw.append(star.getStarName())
+                   .append(" ")
+                   .append(star.getStarPartner().getStarName())
+                   .append(System.lineSeparator()));
         } catch (IOException e) {
             e.printStackTrace();
         }
