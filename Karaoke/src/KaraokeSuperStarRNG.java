@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -35,6 +36,9 @@ public class KaraokeSuperStarRNG {
 
     private void generateStars() {
         String[] stars = properties.get("karaokeStars").toString().replaceAll("^\"|\"$", "").trim().split(",");
+        if (stars.length % 2 != 0) {
+            throw new IllegalArgumentException("NUMBER OF STARS MUST BE EVEN");
+        }
         List<Star> starList = Arrays.stream(stars).map(Star::new).collect(Collectors.toList());
         Collections.shuffle(starList);
         for (int i = 0; i < starList.size(); i += 2) {
@@ -51,13 +55,22 @@ public class KaraokeSuperStarRNG {
 
     private void outputTXT() {
         File starsCSV = new File("stars.txt");
+        List<String> starsInPrint = new ArrayList<>();
         try (PrintWriter pw = new PrintWriter(starsCSV)) {
-           pw.append("Star Partner");
-           pw.append(System.lineSeparator());
-           stars.forEach(star -> pw.append(star.getStarName())
-                   .append(" ")
-                   .append(star.getStarPartner().getStarName())
-                   .append(System.lineSeparator()));
+            pw.append("Star <--> StarPartner");
+            pw.append(System.lineSeparator());
+            pw.append("-----------------");
+            pw.append(System.lineSeparator());
+            stars.forEach(star -> {
+                if (!starsInPrint.contains(star.getStarName())) {
+                    starsInPrint.add(star.getStarName());
+                    starsInPrint.add(star.getStarPartner().getStarName());
+                    pw.append(star.getStarName())
+                            .append(" <--> ")
+                            .append(star.getStarPartner().getStarName())
+                            .append(System.lineSeparator());
+                }
+            });
         } catch (IOException e) {
             e.printStackTrace();
         }

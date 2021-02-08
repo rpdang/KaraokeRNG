@@ -1,17 +1,13 @@
+import lombok.Getter;
+
 public class Star {
+    @Getter
     private final String starName;
+    @Getter
     private Star starPartner;
 
     public Star(String starName) {
         this.starName = starName;
-    }
-
-    public String getStarName() {
-        return this.starName;
-    }
-
-    public Star getStarPartner() {
-        return this.starPartner;
     }
 
     public void setStarPartner(Star starPartner) {
@@ -19,7 +15,7 @@ public class Star {
             this.starPartner = starPartner;
     }
 
-    public boolean isAvailable()    {
-        return this.starPartner==null;
+    public boolean isAvailable() {
+        return this.starPartner == null;
     }
 }

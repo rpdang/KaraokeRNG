@@ -1,9 +1,6 @@
-Star Partner
-Bohan Frallan
-Frallan Bohan
-Lisa J Ricky
-Ricky Lisa J
-Robin LinQuila
-LinQuila Robin
-IsacMyBrother Lisa T
-Lisa T IsacMyBrother
+Star <--> StarPartner
+-----------------
+LinQuila <--> Robin
+Lisa T <--> Lisa J
+Frallan <--> IsacMyBrother
+Ricky <--> Bohan
